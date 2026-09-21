@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commandes — Admin AuriShop</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <main class="admin-main">
+      <header class="admin-header">
+        <div>
+          <h1>Gestion des <span>commandes</span></h1>
+          <p>Suivez et mettez à jour le statut des commandes</p>
+        </div>
+        <div class="admin-user" id="admin-user"></div>
+      </header>
+
+      <div class="admin-toolbar">
+        <input type="text" id="search-orders" placeholder="🔍 Rechercher par n° ou client...">
+        <select id="filter-status">
+          <option value="">Tous les statuts</option>
+          <option value="pending">En attente</option>
+          <option value="confirmed">Confirmée</option>
+          <option value="processing">En préparation</option>
+          <option value="shipped">Expédiée</option>
+          <option value="delivered">Livrée</option>
+          <option value="cancelled">Annulée</option>
+        </select>
+      </div>
+
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>N°</th>
+              <th>Client</th>
+              <th>Date</th>
+              <th>Articles</th>
+              <th>Total</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="orders-tbody">
+            <tr><td colspan="7" style="text-align:center;padding:2rem;">Chargement...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination" id="orders-pagination" style="margin-top:1.5rem;"></div>
+    </main>
+  </div>
+<script>window.lucide && window.lucide.createIcons();</script>
+  <script type="module" src="../js/admin-orders.js"></script>
+</body>
+</html>

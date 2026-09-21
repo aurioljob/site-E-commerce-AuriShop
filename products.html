@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catalogue — AuriShop</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/shop.css">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <img src="assets/logo.png" alt="AuriShop">
+      </a>
+      <nav>
+  <ul class="navbar-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="products.html">Produits</a></li>
+    <li><a href="categories.html">Catégories</a></li>
+    <li>
+      <a href="cart.html" style="position:relative;">
+        Panier
+        <span id="cart-badge" class="nav-badge" style="display:none;">0</span>
+      </a>
+    </li>
+    <li>
+      <a href="wishlist.html" style="position:relative;">
+        ❤️ Favoris
+        <span id="wishlist-badge" class="nav-badge" style="display:none;">0</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+      <div class="navbar-actions">
+        <div id="auth-links" style="display:flex; gap:0.75rem;">
+          <a href="login.html" class="btn btn-ghost">Connexion</a>
+          <a href="register.html" class="btn btn-primary">S'inscrire</a>
+        </div>
+        <div id="user-links" style="display:none; align-items:center; gap:1rem;">
+          <span id="user-name" style="font-weight:600;"></span>
+          <a href="admin/index.html" id="admin-link" class="btn btn-primary" style="display:none;">⚙️ Admin</a>
+          <a href="profile.html" class="btn btn-ghost">Profil</a>
+          <a href="#" id="logout-btn" class="btn btn-outline">Déconnexion</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- LAYOUT BOUTIQUE -->
+  <div class="shop-layout">
+
+    <!-- SIDEBAR FILTRES -->
+    <aside class="filters-sidebar">
+      <h3>Filtres</h3>
+
+      <div class="filter-group">
+        <h4>Recherche</h4>
+        <input type="text" id="search-input" placeholder="Nom du produit...">
+      </div>
+
+      <div class="filter-group">
+        <h4>Catégories</h4>
+        <ul class="filter-category-list" id="categories-list">
+          <!-- Rempli par JS -->
+        </ul>
+      </div>
+
+      <div class="filter-group">
+        <h4>Marque</h4>
+        <input type="text" id="brand-input" placeholder="Ex : Samsung">
+      </div>
+
+      <div class="filter-group">
+        <h4>Prix (€)</h4>
+        <div class="price-range">
+          <input type="number" id="min-price" placeholder="Min" min="0">
+          <input type="number" id="max-price" placeholder="Max" min="0">
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label style="display:flex;align-items:center;gap:0.5rem;cursor:pointer;font-size:0.9rem;">
+          <input type="checkbox" id="in-stock">
+          En stock uniquement
+        </label>
+      </div>
+    </aside>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main>
+      <div class="shop-header">
+        <div>
+          <h1>Tous les <span>produits</span></h1>
+          <p class="results-count" id="results-count"></p>
+        </div>
+        <div class="shop-toolbar">
+          <label for="sort-select">Trier par :</label>
+          <select id="sort-select">
+            <option value="created_at">Plus récents</option>
+            <option value="price_asc">Prix croissant</option>
+            <option value="price_desc">Prix décroissant</option>
+            <option value="name">Nom (A-Z)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="active-filters" id="active-filters"></div>
+
+      <div class="products-grid" id="products-grid">
+        <!-- Rempli par JS -->
+      </div>
+
+      <div class="pagination" id="pagination"></div>
+    </main>
+  </div>
+
+  <!-- ✅ UN SEUL script : products.js fait tout -->
+  <script type="module" src="js/products.js"></script>
+</body>
+</html>

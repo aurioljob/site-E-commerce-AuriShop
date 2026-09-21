@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statistiques — Admin AuriShop</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <main class="admin-main">
+      <header class="admin-header">
+        <div>
+          <h1><span>Statistiques</span> avancées</h1>
+          <p>Analyse des performances de votre boutique</p>
+        </div>
+        <div class="admin-user" id="admin-user"></div>
+      </header>
+
+      <div class="stats-grid">
+        <div class="stat-card green">
+          <div class="stat-label">CA total</div>
+          <div class="stat-value" id="s-revenue">—</div>
+        </div>
+        <div class="stat-card blue">
+          <div class="stat-label">Panier moyen</div>
+          <div class="stat-value" id="s-avg">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Note moyenne</div>
+          <div class="stat-value" id="s-rating">—</div>
+        </div>
+        <div class="stat-card red">
+          <div class="stat-label">Taux d'annulation</div>
+          <div class="stat-value" id="s-cancel">—</div>
+        </div>
+      </div>
+
+      <div class="admin-panel">
+        <div class="admin-panel-header">
+          <h2>Top 5 produits les plus vendus</h2>
+        </div>
+        <div id="top-products"></div>
+      </div>
+
+      <div class="admin-panel">
+        <div class="admin-panel-header">
+          <h2>Répartition des commandes par statut</h2>
+        </div>
+        <div id="status-distribution"></div>
+      </div>
+
+      <div class="admin-panel">
+        <div class="admin-panel-header">
+          <h2>Top 5 clients (par CA généré)</h2>
+        </div>
+        <div id="top-customers"></div>
+      </div>
+    </main>
+  </div>
+<script>window.lucide && window.lucide.createIcons();</script>
+  <script type="module" src="../js/admin-statistics.js"></script>
+</body>
+</html>

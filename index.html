@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuriShop — Tout ce dont vous avez besoin</title>
+  <meta name="description" content="AuriShop, votre boutique en ligne. Découvrez nos produits de qualité.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+</head>
+<body>
+
+  <!-- ============================ NAVBAR ============================ -->
+  <header class="navbar">
+    <div class="navbar-container">
+      <a href="index.html" class="navbar-logo">
+        <img src="assets/logo.png" alt="AuriShop">
+      </a>
+
+     <nav>
+  <ul class="navbar-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="products.html">Produits</a></li>
+    <li><a href="categories.html">Catégories</a></li>
+    <li>
+      <a href="cart.html" style="position:relative;">
+        Panier
+        <span id="cart-badge" class="nav-badge" style="display:none;">0</span>
+      </a>
+    </li>
+    <li>
+      <a href="wishlist.html" style="position:relative;">
+        ❤️ Favoris
+        <span id="wishlist-badge" class="nav-badge" style="display:none;">0</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+      <div class="navbar-actions">
+        <!-- Non connecté -->
+        <div id="auth-links" style="display:flex; gap:0.75rem;">
+          <a href="login.html" class="btn btn-ghost">Connexion</a>
+          <a href="register.html" class="btn btn-primary">S'inscrire</a>
+        </div>
+
+        <!-- Connecté -->
+        <div id="user-links" style="display:none; align-items:center; gap:1rem;">
+            <span id="user-name" style="font-weight:600;"></span>
+            <a href="admin/index.html" id="admin-link" class="btn btn-primary" style="display:none;">⚙️ Admin</a>
+            <a href="profile.html" class="btn btn-ghost">Profil</a>
+            <a href="#" id="logout-btn" class="btn btn-outline">Déconnexion</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================ HERO ============================ -->
+  <section class="hero">
+    <div class="hero-container">
+      <h1>Tout ce dont vous avez besoin,<br>en <span>un clic</span>.</h1>
+      <p>Découvrez notre sélection de produits de qualité, livrés rapidement partout au Cameroun et au-delà.</p>
+      <div class="hero-actions">
+        <a href="products.html" class="btn btn-primary">Explorer les produits</a>
+        <a href="register.html" class="btn btn-outline" style="background:#fff;">Créer un compte</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ PRODUITS VEDETTES ============================ -->
+  <section class="section">
+    <div class="section-header">
+      <h2>Nos <span>nouveautés</span></h2>
+      <p>Les derniers produits ajoutés à notre catalogue</p>
+    </div>
+
+    <div id="featured-products" class="products-grid">
+      <!-- Rempli par JS -->
+    </div>
+  </section>
+
+  <!-- ============================ AVANTAGES ============================ -->
+  <section class="section" style="background: var(--gris-clair); max-width: 100%;">
+    <div style="max-width:1280px; margin:0 auto;">
+      <div class="section-header">
+        <h2>Pourquoi <span>AuriShop</span> ?</h2>
+        <p>Une expérience d'achat simple, rapide et sécurisée</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🚚</div>
+          <h3>Livraison rapide</h3>
+          <p>Recevez vos commandes en 48h à Douala et Yaoundé.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>Paiement sécurisé</h3>
+          <p>Transactions protégées et paiement à la livraison disponible.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>Support 7j/7</h3>
+          <p>Notre équipe est là pour vous aider via chat en direct.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">✅</div>
+          <h3>Qualité garantie</h3>
+          <p>Produits vérifiés et retour gratuit sous 14 jours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ FOOTER ============================ -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <h4>AuriShop</h4>
+        <p style="opacity:0.8; font-size:0.92rem;">Tout ce dont vous avez besoin, en un clic.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Boutique</h4>
+        <ul>
+          <li><a href="products.html">Tous les produits</a></li>
+          <li><a href="categories.html">Catégories</a></li>
+          <li><a href="#">Promotions</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Mon compte</h4>
+        <ul>
+          <li><a href="login.html">Connexion</a></li>
+          <li><a href="register.html">Inscription</a></li>
+          <li><a href="orders.html">Mes commandes</a></li>
+          <li><a href="wishlist.html">Favoris</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Aide</h4>
+        <ul>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Livraison</a></li>
+          <li><a href="#">Retours</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 AuriShop — Projet pédagogique Supabase. Tous droits réservés.
+    </div>
+  </footer>
+
+  <script type="module" src="js/index.js"></script>
+</body>
+</html>

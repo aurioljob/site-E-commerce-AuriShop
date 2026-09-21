@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin — AuriShop</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <main class="admin-main">
+      <header class="admin-header">
+        <div>
+          <h1>Tableau de <span>bord</span></h1>
+          <p>Vue d'ensemble de votre boutique</p>
+        </div>
+        <div class="admin-user" id="admin-user"></div>
+      </header>
+
+      <!-- Cartes statistiques -->
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-card blue">
+          <div class="stat-icon">👥</div>
+          <div class="stat-label">Utilisateurs</div>
+          <div class="stat-value" id="stat-users">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">📦</div>
+          <div class="stat-label">Produits</div>
+          <div class="stat-value" id="stat-products">—</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-icon">🛒</div>
+          <div class="stat-label">Commandes</div>
+          <div class="stat-value" id="stat-orders">—</div>
+        </div>
+        <div class="stat-card purple">
+          <div class="stat-icon">💰</div>
+          <div class="stat-label">Chiffre d'affaires</div>
+          <div class="stat-value" id="stat-revenue">—</div>
+        </div>
+      </div>
+
+      <!-- Commandes par période -->
+      <div class="admin-panel">
+        <div class="admin-panel-header">
+          <h2>Commandes (7 derniers jours)</h2>
+        </div>
+        <div class="chart-bars" id="orders-chart">
+          <p style="color:var(--gris-texte);">Chargement...</p>
+        </div>
+      </div>
+
+      <!-- Deux colonnes : dernières commandes + stock faible -->
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1.5rem;" id="admin-columns">
+        <div class="admin-panel">
+          <div class="admin-panel-header">
+            <h2>Dernières commandes</h2>
+            <a href="orders.html" class="btn btn-ghost" style="font-size:0.85rem;">Voir tout →</a>
+          </div>
+          <div id="recent-orders">
+            <p style="color:var(--gris-texte);">Chargement...</p>
+          </div>
+        </div>
+
+        <div class="admin-panel">
+          <div class="admin-panel-header">
+            <h2>Produits en stock faible</h2>
+            <a href="products.html" class="btn btn-ghost" style="font-size:0.85rem;">Voir tout →</a>
+          </div>
+          <div id="low-stock">
+            <p style="color:var(--gris-texte);">Chargement...</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+<script>window.lucide && window.lucide.createIcons();</script>
+  <script type="module" src="../js/admin-dashboard.js"></script>
+</body>
+</html>

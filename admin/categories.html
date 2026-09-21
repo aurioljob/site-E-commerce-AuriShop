@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catégories — Admin AuriShop</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <main class="admin-main">
+      <header class="admin-header">
+        <div>
+          <h1>Gestion des <span>catégories</span></h1>
+          <p>Organisez votre catalogue par univers</p>
+        </div>
+        <div class="admin-user" id="admin-user"></div>
+      </header>
+
+      <div class="admin-toolbar">
+        <button class="btn btn-primary" id="btn-new-category">
+          + Nouvelle catégorie
+        </button>
+      </div>
+
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Slug</th>
+              <th>Nb produits</th>
+              <th>Créée le</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="categories-tbody">
+            <tr><td colspan="5" style="text-align:center;padding:2rem;">Chargement...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+<script>window.lucide && window.lucide.createIcons();</script>
+  <script type="module" src="../js/admin-categories.js"></script>
+</body>
+</html>

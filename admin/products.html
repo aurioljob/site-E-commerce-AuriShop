@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produits — Admin AuriShop</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <main class="admin-main">
+      <header class="admin-header">
+        <div>
+          <h1>Gestion des <span>produits</span></h1>
+          <p>Créer, modifier, activer/désactiver vos produits</p>
+        </div>
+        <div class="admin-user" id="admin-user"></div>
+      </header>
+
+      <div class="admin-toolbar">
+        <input type="text" id="search-products" placeholder="🔍 Rechercher un produit...">
+        <select id="filter-category">
+          <option value="">Toutes les catégories</option>
+        </select>
+        <select id="filter-status">
+          <option value="">Tous les statuts</option>
+          <option value="active">Actifs</option>
+          <option value="inactive">Inactifs</option>
+        </select>
+        <button class="btn btn-primary" id="btn-new-product" style="margin-left:auto;display:inline-flex;align-items:center;gap:0.5rem;">
+            <i data-lucide="plus" style="width:16px;height:16px;"></i>
+            Nouveau produit
+        </button>
+      </div>
+
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Nom</th>
+              <th>Catégorie</th>
+              <th>Prix</th>
+              <th>Stock</th>
+              <th>Statut</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="products-tbody">
+            <tr><td colspan="7" style="text-align:center;padding:2rem;">Chargement...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination" id="products-pagination" style="margin-top:1.5rem;"></div>
+    </main>
+  </div>
+  <script>window.lucide && window.lucide.createIcons();</script>
+
+  <script type="module" src="../js/admin-products.js"></script>
+</body>
+</html>

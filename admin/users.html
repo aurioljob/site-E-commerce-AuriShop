@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utilisateurs — Admin AuriShop</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <main class="admin-main">
+      <header class="admin-header">
+        <div>
+          <h1>Gestion des <span>utilisateurs</span></h1>
+          <p>Consultez et gérez les comptes clients</p>
+        </div>
+        <div class="admin-user" id="admin-user"></div>
+      </header>
+
+      <div class="admin-toolbar">
+        <input type="text" id="search-users" placeholder="🔍 Rechercher par nom ou email...">
+        <select id="filter-role">
+          <option value="">Tous les rôles</option>
+          <option value="customer">Clients</option>
+          <option value="admin">Administrateurs</option>
+        </select>
+      </div>
+
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Avatar</th>
+              <th>Nom</th>
+              <th>Email</th>
+              <th>Téléphone</th>
+              <th>Rôle</th>
+              <th>Inscription</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="users-tbody">
+            <tr><td colspan="7" style="text-align:center;padding:2rem;">Chargement...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination" id="users-pagination" style="margin-top:1.5rem;"></div>
+    </main>
+  </div>
+<script>window.lucide && window.lucide.createIcons();</script>
+  <script type="module" src="../js/admin-users.js"></script>
+</body>
+</html>

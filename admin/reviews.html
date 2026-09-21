@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avis — Admin AuriShop</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="icon" type="image/png" href="../assets/logo.png">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar" id="admin-sidebar"></aside>
+
+    <main class="admin-main">
+      <header class="admin-header">
+        <div>
+          <h1>Modération des <span>avis</span></h1>
+          <p>Approuvez ou rejetez les avis clients</p>
+        </div>
+        <div class="admin-user" id="admin-user"></div>
+      </header>
+
+      <div class="admin-toolbar">
+        <select id="filter-status">
+          <option value="">Tous les avis</option>
+          <option value="pending">En attente</option>
+          <option value="approved">Approuvés</option>
+        </select>
+      </div>
+
+      <div id="reviews-container" style="display:grid;gap:1rem;">
+        <p style="text-align:center;padding:2rem;color:var(--gris-texte);">Chargement...</p>
+      </div>
+    </main>
+  </div>
+<script>window.lucide && window.lucide.createIcons();</script>
+  <script type="module" src="../js/admin-reviews.js"></script>
+</body>
+</html>
