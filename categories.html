@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catégories — AuriShop</title><meta name="description" content="AuriShop, votre boutique en ligne au Cameroun. Découvrez nos produits de qualité, livrés en 48h.">
+  <title>Catégories — AuriShop</title>
+  <meta name="description" content="Explorez toutes les catégories AuriShop : électronique, vêtements, maison, sport, beauté et plus.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/shop.css">
   <link rel="icon" type="image/png" href="assets/logo.png">
   <script src="https://unpkg.com/lucide@latest"></script>
-  <link rel="stylesheet" href="css/shop.css">
 </head>
 <body>
 
-<!-- ============================ TOP BAR (promo) ============================ -->
+  <!-- ============================ TOP BAR (promo) ============================ -->
   <div class="topbar">
     <div class="topbar-container">
       <p>
@@ -35,7 +36,6 @@
         <img src="assets/logo.png" alt="AuriShop">
       </a>
 
-      <!-- Barre de recherche -->
       <div class="navbar-search">
         <i data-lucide="search" class="navbar-search-icon"></i>
         <input type="text" id="navbar-search-input" placeholder="Rechercher un produit...">
@@ -51,7 +51,6 @@
       </nav>
 
       <div class="navbar-actions">
-        <!-- Icônes actions -->
         <a href="wishlist.html" class="navbar-icon" title="Favoris">
           <i data-lucide="heart"></i>
           <span id="wishlist-badge" class="nav-badge" style="display:none;">0</span>
@@ -61,7 +60,6 @@
           <span id="cart-badge" class="nav-badge" style="display:none;">0</span>
         </a>
 
-        <!-- Non connecté -->
         <div id="auth-links" style="display:flex; gap:0.5rem;">
           <a href="login.html" class="btn btn-ghost">
             <i data-lucide="user" style="width:16px;height:16px;"></i>
@@ -70,7 +68,6 @@
           <a href="register.html" class="btn btn-primary">S'inscrire</a>
         </div>
 
-        <!-- Connecté -->
         <div id="user-links" style="display:none; align-items:center; gap:0.75rem;">
           <span id="user-name" style="font-weight:600;font-size:0.9rem;"></span>
           <a href="admin/index.html" id="admin-link" class="btn btn-primary" style="display:none;">
@@ -88,17 +85,72 @@
     </div>
   </header>
 
-  <section class="section">
-    <div class="section-header">
-      <h2>Nos <span>catégories</span></h2>
-      <p>Explorez notre catalogue par univers</p>
+  <!-- ============================ HERO CATÉGORIES ============================ -->
+  <section class="categories-hero">
+    <div class="categories-hero-content">
+      <p class="categories-hero-eyebrow">
+        <i data-lucide="compass" style="width:14px;height:14px;"></i>
+        Explorez notre univers
+      </p>
+      <h1>Toutes nos <em>catégories</em></h1>
+      <p>Trouvez rapidement ce que vous cherchez parmi nos univers soigneusement sélectionnés.</p>
+
+      <div class="categories-hero-stats">
+        <div class="hero-stat">
+          <strong id="stat-categories-count">—</strong>
+          <span>Catégories</span>
+        </div>
+        <div class="hero-stat">
+          <strong id="stat-products-count">—</strong>
+          <span>Produits</span>
+        </div>
+        <div class="hero-stat">
+          <strong>48h</strong>
+          <span>Livraison</span>
+        </div>
+      </div>
     </div>
-    <div class="categories-grid" id="categories-grid"></div>
   </section>
 
-  <!-- ✅ UN SEUL script : categories.js qui fait TOUT -->
+  <!-- ============================ GRILLE CATÉGORIES ============================ -->
+  <section class="section section--categories-page">
+    <div class="categories-toolbar">
+      <div class="categories-toolbar-info">
+        <h2>Nos univers</h2>
+        <span id="categories-count-label">Chargement...</span>
+      </div>
+      <div class="categories-toolbar-actions">
+        <label for="sort-categories">Trier par :</label>
+        <select id="sort-categories">
+          <option value="name">Nom (A-Z)</option>
+          <option value="popular">Plus populaires</option>
+          <option value="recent">Plus récentes</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="categories-grid" id="categories-grid">
+      <!-- Skeleton loader -->
+      <div class="skeleton skeleton-card"></div>
+      <div class="skeleton skeleton-card"></div>
+      <div class="skeleton skeleton-card"></div>
+      <div class="skeleton skeleton-card"></div>
+    </div>
+  </section>
+
+  <!-- ============================ CTA BAS DE PAGE ============================ -->
+  <section class="categories-cta">
+    <div class="categories-cta-content">
+      <h2>Vous ne trouvez pas ce que vous cherchez ?</h2>
+      <p>Parcourez notre catalogue complet avec des centaines de produits disponibles.</p>
+      <a href="products.html" class="btn btn-primary">
+        Voir tous les produits
+        <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+      </a>
+    </div>
+  </section>
+
   <script type="module" src="js/categories.js"></script>
-    <script type="module" src="js/index.js"></script>
   <script>window.lucide && window.lucide.createIcons();</script>
 </body>
 </html>

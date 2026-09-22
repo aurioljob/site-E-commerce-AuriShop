@@ -509,24 +509,49 @@ async function submitReview() {
     alert('Veuillez sélectionner une note.');
     return;
   }
-  const comment = document.getElementById('review-comment').value.trim();
-  const { data: { user } } = await supabase.auth.getUser();
 
-  const { error } = await supabase.from('reviews').insert({
-    user_id: user.id,
-    product_id: productId,
-    rating: selectedRating,
-    comment: comment || null,
-    is_approved: false // modération admin
-  });
+  const form = document.getElementById('review-form-container');
+  const submitButton = document.getElementById('submit-review');
+  const commentInput = document.getElementById('review-comment');
+  if (!form || !submitButton || !commentInput) return;
 
-  if (error) {
-    alert('Erreur : ' + error.message);
+  const { data: { user }, error: sessionError } = await supabase.auth.getUser();
+  if (sessionError || !user) {
+    alert('Votre session a expiré. Veuillez vous reconnecter pour publier un avis.');
+    window.location.href = 'login.html';
     return;
   }
 
-  alert('Merci ! Votre avis sera publié après modération.');
-  document.getElementById('review-form-container').innerHTML = '<p style="color:var(--success);">Merci pour votre avis !</p>';
+  submitButton.disabled = true;
+  submitButton.textContent = 'Publication...';
+
+  const comment = document.getElementById('review-comment').value.trim();
+
+  try {
+    const { error } = await supabase.from('reviews').insert({
+      user_id: user.id,
+      product_id: productId,
+      rating: selectedRating,
+      comment: comment || null,
+      is_approved: true
+    });
+
+    if (error) {
+      console.error('Erreur enregistrement avis:', error);
+      alert(`Impossible d'enregistrer votre avis : ${error.message}`);
+      submitButton.disabled = false;
+      submitButton.textContent = 'Publier mon avis';
+      return;
+    }
+
+    alert('Merci ! Votre avis a été publié.');
+    form.innerHTML = '<p style="color:var(--success);">Merci pour votre avis !</p>';
+  } catch (error) {
+    console.error('Erreur inattendue enregistrement avis:', error);
+    alert(`Impossible d'enregistrer votre avis : ${error.message}`);
+    submitButton.disabled = false;
+    submitButton.textContent = 'Publier mon avis';
+  }
 }
 
 /* ============================================================

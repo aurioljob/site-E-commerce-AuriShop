@@ -189,24 +189,63 @@ function renderCheckout() {
         </div>
 
         <div class="checkout-block">
-          <h3>💳 Paiement</h3>
-          <div class="payment-options">
-            <label class="payment-option selected">
-              <input type="radio" name="payment" value="cod" checked>
-              <div>
-                <strong>Paiement à la livraison</strong>
-                <p>Payez en espèces à la réception de votre commande</p>
-              </div>
-            </label>
-            <label class="payment-option" style="opacity:0.5;">
-              <input type="radio" name="payment" value="card" disabled>
-              <div>
-                <strong>Carte bancaire</strong>
-                <p>Bientôt disponible</p>
-              </div>
-            </label>
-          </div>
+  <h3>💳 Mode de paiement</h3>
+  <div class="payment-options">
+    <label class="payment-option" data-method="cod">
+      <input type="radio" name="payment" value="cod" checked>
+      <div class="payment-option-content">
+        <div class="payment-option-icon">
+          <i data-lucide="banknote"></i>
         </div>
+        <div>
+          <strong>Paiement à la livraison</strong>
+          <p>Payez en espèces à la réception de votre commande</p>
+        </div>
+      </div>
+    </label>
+
+    <label class="payment-option" data-method="orange_money">
+      <input type="radio" name="payment" value="orange_money">
+      <div class="payment-option-content">
+        <div class="payment-option-icon payment-option-icon--orange">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FF7900'><circle cx='12' cy='12' r='10'/></svg>" alt="Orange">
+        </div>
+        <div>
+          <strong>Orange Money</strong>
+          <p>Paiement mobile via Orange Cameroun</p>
+        </div>
+      </div>
+    </label>
+
+    <label class="payment-option" data-method="mtn_momo">
+      <input type="radio" name="payment" value="mtn_momo">
+      <div class="payment-option-content">
+        <div class="payment-option-icon payment-option-icon--mtn">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23FFCC00'><rect x='4' y='4' width='16' height='16' rx='3'/></svg>" alt="MTN">
+        </div>
+        <div>
+          <strong>MTN Mobile Money</strong>
+          <p>Paiement mobile via MTN Cameroun</p>
+        </div>
+      </div>
+    </label>
+  </div>
+
+  <!-- Champ numéro qui apparaît si MoMo sélectionné -->
+  <div id="momo-phone-container" style="display:none;margin-top:1.25rem;">
+    <label style="font-size:0.88rem;font-weight:600;display:block;margin-bottom:0.4rem;">
+      Numéro <span id="momo-operator-label">Mobile Money</span>
+    </label>
+    <div style="display:flex;gap:0.5rem;align-items:center;">
+      <span style="padding:0.75rem 0.9rem;background:var(--gris-clair);border-radius:var(--radius);font-weight:600;color:var(--gris-texte);">+237</span>
+      <input type="tel" id="momo-phone" placeholder="6XX XXX XXX" 
+             style="flex:1;padding:0.75rem 0.9rem;border:1.5px solid var(--gris);border-radius:var(--radius);font-family:inherit;font-size:0.95rem;">
+    </div>
+    <small style="color:var(--gris-texte);font-size:0.8rem;display:block;margin-top:0.35rem;">
+      Vous recevrez une notification pour confirmer le paiement.
+    </small>
+  </div>
+</div>
 
       </div>
 
@@ -256,6 +295,25 @@ function bindEvents() {
       opt.querySelector('input[type="radio"]').checked = true;
     });
   });
+
+  // Sélection du mode de paiement
+document.querySelectorAll('.payment-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    const method = opt.dataset.method;
+    document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+    opt.querySelector('input[type="radio"]').checked = true;
+
+    const momoContainer = document.getElementById('momo-phone-container');
+    if (method === 'orange_money' || method === 'mtn_momo') {
+      momoContainer.style.display = 'block';
+      document.getElementById('momo-operator-label').textContent =
+        method === 'orange_money' ? 'Orange Money' : 'MTN MoMo';
+    } else {
+      momoContainer.style.display = 'none';
+    }
+  });
+});
 
   // Nouvelle adresse
   document.getElementById('add-new-address')?.addEventListener('click', () => openAddressModal());
@@ -381,13 +439,24 @@ function openAddressModal() {
   });
 }
 
-/* ============================================================
-   PASSER LA COMMANDE (via RPC)
-   ============================================================ */
 async function placeOrder() {
   if (!state.selectedAddressId) {
     alert('Veuillez sélectionner une adresse.');
     return;
+  }
+
+  const paymentMethod = document.querySelector('input[name="payment"]:checked')?.value || 'cod';
+
+  // Validation numéro MoMo
+  if (paymentMethod === 'orange_money' || paymentMethod === 'mtn_momo') {
+    const phone = document.getElementById('momo-phone')?.value.trim();
+    if (!phone || phone.length < 9) {
+      alert('Veuillez saisir un numéro de téléphone valide.');
+      return;
+    }
+
+    // 🎬 SIMULATION : afficher un écran de traitement
+    await simulateMoMoPayment(paymentMethod, phone);
   }
 
   const btn = document.getElementById('place-order');
@@ -398,29 +467,54 @@ async function placeOrder() {
     const subtotal = state.items.reduce((s, i) => s + getItemPrice(i) * i.quantity, 0);
     const shipping = subtotal >= FREE_SHIPPING_FROM ? 0 : SHIPPING_FEE;
 
-    // Appel de la fonction SQL transactionnelle
     const { data, error } = await supabase.rpc('create_order', {
       p_address_id: state.selectedAddressId,
-      p_shipping_fee: shipping
+      p_shipping_fee: shipping,
+      p_payment_method: paymentMethod
     });
 
-    if (error) {
-      console.error('Erreur create_order:', error);
-      alert('Erreur lors de la création de la commande : ' + error.message);
-      btn.disabled = false;
-      btn.textContent = '✓ Confirmer la commande';
-      return;
-    }
+    if (error) { /* ... */ return; }
 
-    // Succès !
     showSuccess(data);
 
   } catch (err) {
     console.error(err);
-    alert('Erreur inattendue : ' + err.message);
+    alert('Erreur : ' + err.message);
     btn.disabled = false;
     btn.textContent = '✓ Confirmer la commande';
   }
+}
+
+/* ============================================================
+   SIMULATION PAIEMENT MOBILE MONEY (à remplacer par KPay)
+   ============================================================ */
+async function simulateMoMoPayment(method, phone) {
+  const operator = method === 'orange_money' ? 'Orange Money' : 'MTN Mobile Money';
+
+  // Afficher un écran de traitement plein écran
+  const overlay = document.createElement('div');
+  overlay.className = 'payment-processing-overlay';
+  overlay.innerHTML = `
+    <div class="payment-processing-card">
+      <div class="payment-spinner"></div>
+      <h2>Paiement ${operator}</h2>
+      <p>Une demande de paiement a été envoyée au <strong>+237 ${phone}</strong>.</p>
+      <p class="payment-processing-hint">Composez le code USSD reçu pour valider.</p>
+      <div class="payment-processing-status">
+        <span class="payment-dot"></span>
+        <span>En attente de confirmation...</span>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  // Simuler une attente de 3 secondes
+  await new Promise(resolve => setTimeout(resolve, 3000));
+
+  // Fermer l'overlay
+  overlay.remove();
+
+  return true;
 }
 
 /* ============================================================
