@@ -244,13 +244,20 @@ function changeStatus(id, currentStatus) {
     confirmLabel: 'Mettre à jour',
     onConfirm: async () => {
       const newStatus = document.getElementById('new-status').value;
-      const { error } = await supabase
+      const { data: updatedOrder, error } = await supabase
         .from('orders')
-        .update({ status: newStatus, updated_at: new Date().toISOString() })
-        .eq('id', id);
+        .update({ status: newStatus })
+        .eq('id', id)
+        .select('id, status')
+        .maybeSingle();
 
       if (error) {
         alert('Erreur : ' + error.message);
+        return false;
+      }
+
+      if (!updatedOrder) {
+        alert('La commande n\'a pas été modifiée. Vérifiez vos droits Supabase (policy RLS).');
         return false;
       }
 

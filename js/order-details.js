@@ -1,6 +1,7 @@
 // js/order-details.js
 import { supabase } from './supabase.js';
 import { initNavbar } from './navbar.js';
+import { generateInvoice } from './invoice.js';
 
 const STATUS_FLOW = ['pending', 'confirmed', 'processing', 'shipped', 'delivered'];
 
@@ -263,9 +264,22 @@ function renderOrder(order) {
   if (window.lucide) window.lucide.createIcons();
 
   // Actions
-  document.getElementById('download-invoice')?.addEventListener('click', () => {
-    alert('Génération de la facture PDF à venir (Edge Function).');
-  });
+document.getElementById('download-invoice')?.addEventListener('click', async () => {
+  const btn = document.getElementById('download-invoice');
+  const originalText = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<span style="display:inline-block;animation:spin 0.8s linear infinite;">⟳</span> Génération...';
+
+  try {
+    await generateInvoice(order);
+  } catch (err) {
+    console.error('Erreur PDF :', err);
+    alert('Impossible de générer la facture : ' + err.message);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = originalText;
+  }
+});
   document.getElementById('contact-support')?.addEventListener('click', () => {
     alert('Le chat de support arrive bientôt !');
   });
