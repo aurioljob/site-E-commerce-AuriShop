@@ -1774,6 +1774,160 @@
   animation: heartPop 0.3s ease;
 }
 
+/* ============================================================
+   MOBILE FINISHING RULES
+   ============================================================ */
+@media (max-width: 600px) {
+  .shop-layout,
+  .product-detail {
+    padding-left: 0.85rem;
+    padding-right: 0.85rem;
+  }
+
+  .filters-sidebar {
+    padding: 1rem;
+  }
+
+  .shop-toolbar {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .shop-toolbar select {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .detail-rating,
+  .detail-price {
+    flex-wrap: wrap;
+  }
+
+  .purchase-row {
+    gap: 0.75rem;
+  }
+
+  .purchase-row .quantity-selector {
+    flex: 1;
+  }
+
+  .purchase-row .quantity-selector button,
+  .purchase-row .quantity-selector input {
+    flex: 1;
+    width: auto;
+  }
+
+  .detail-actions,
+  .detail-actions .btn {
+    width: 100%;
+  }
+
+  .checkout-block,
+  .cart-summary,
+  .profile-block {
+    padding: 1rem;
+  }
+
+  .checkout-block-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .checkout-block-header .btn {
+    width: 100%;
+  }
+
+  .address-header,
+  .address-card-header {
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .cart-item {
+    padding: 1rem;
+  }
+
+  .cart-item-actions {
+    gap: 0.6rem;
+  }
+
+  .cart-item-actions .quantity-selector {
+    max-width: 145px;
+  }
+
+  .cart-item-actions .quantity-selector button {
+    width: 36px;
+  }
+
+  .cart-item-actions .quantity-selector input {
+    width: 42px;
+  }
+
+  .modal-overlay {
+    padding: 0.75rem;
+  }
+
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .modal-footer {
+    flex-direction: column-reverse;
+  }
+
+  .modal-footer .btn {
+    width: 100%;
+  }
+
+  .profile-nav {
+    margin-inline: -0.25rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .profile-nav-item {
+    padding: 0.6rem 0.7rem;
+    font-size: 0.85rem;
+  }
+
+  .addresses-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 380px) {
+  .shop-layout .products-grid {
+    gap: 0.65rem;
+  }
+
+  .cart-item {
+    grid-template-columns: 68px 1fr;
+    gap: 0.75rem;
+  }
+
+  .cart-item-image {
+    width: 68px;
+    height: 68px;
+  }
+
+  .cart-item-actions {
+    justify-content: flex-start;
+  }
+
+  .cart-item-total {
+    margin-left: auto;
+  }
+
+  .purchase-row .quantity-selector {
+    flex-basis: 100%;
+  }
+}
+
 @keyframes heartPop {
   0% { transform: scale(1); }
   50% { transform: scale(1.3); }

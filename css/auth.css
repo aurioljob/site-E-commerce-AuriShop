@@ -299,11 +299,29 @@
 }
 
 @media (max-width: 480px) {
+  .auth-form-side {
+    padding: 1.5rem 1rem;
+  }
+
+  .auth-logo-mobile {
+    margin-bottom: 1.5rem;
+  }
+
+  .auth-logo-mobile img {
+    height: 48px;
+  }
+
   .form-row {
     grid-template-columns: 1fr;
   }
 
   .auth-container h1 {
     font-size: 1.5rem;
+  }
+
+  .form-options {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.65rem;
   }
 }
